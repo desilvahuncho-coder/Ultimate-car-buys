@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Port Clearing & Forwarding - Car Buyer Kenya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #fafafa;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Cinematic Slow Smoky Reveal Effect */
+    @keyframes smokyReveal {
+      0% {
+        filter: blur(12px);
+        opacity: 0;
+        transform: scale(0.96) translateY(4px);
+        text-shadow: 0 0 40px rgba(255,255,255,0.8);
+      }
+      50% {
+        opacity: 0.5;
+        filter: blur(4px);
+      }
+      100% {
+        filter: blur(0px);
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        text-shadow: none;
+      }
+    }
+
+    .smoky-title {
+      animation: smokyReveal 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    .smoky-subtitle {
+      animation: smokyReveal 2.8s cubic-bezier(0.25, 1, 0.5, 1) 0.4s forwards;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body class="text-slate-900" x-data="{ mobileMenuOpen: false }">
+
+  <!-- INTEGRATED HEADER WITH NAVIGATION PILLS -->
+  <header class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <div class="flex-shrink-0">
+          <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">
+            CAR BUYER <span class="text-[#f9a825]">KENYA</span>
+          </span>
+        </div>
+
+        <div class="flex items-center">
+          <button @click="mobileMenuOpen = true" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-900 hover:bg-gray-100 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Layer Matching All Site Pages -->
+    <div class="border-t border-gray-100 bg-gray-50/50 py-3">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex space-x-2 overflow-x-auto no-scrollbar py-1 justify-start md:justify-center">
+          <a href="index.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Home</a>
+          <a href="about.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">About Us</a>
+          <a href="auction.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Auction Purchase</a>
+          <a href="showroom.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Nairobi Stock</a>
+          <a href="finance.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Import Finance</a>
+          <a href="dealers.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">B2B Dealers</a>
+          <a href="clearing.html" class="bg-[#f9a825] text-slate-950 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap shadow-sm">Port Clearing</a>
+          <a href="training.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Training Academy</a>
+          <a href="contact.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO BANNER WITH SMOKING EFFECT -->
+  <section class="bg-[#0f172a] text-white py-16 px-4 text-center relative overflow-hidden">
+    <div class="max-w-4xl mx-auto z-10 relative">
+      <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight mb-3 smoky-title">
+        PORT CLEARING & <span class="text-[#f9a825]">FORWARDING</span>
+      </h1>
+      <p class="text-xs md:text-sm text-slate-400 uppercase tracking-widest font-semibold max-w-2xl mx-auto smoky-subtitle">
+        MOMBASA PORT LOGISTICS, KRA CUSTOMS VERIFICATION, AND STRESS-FREE CONTAINER DECLARATIONS.
+      </p>
+    </div>
+  </section>
+
+  <!-- MAIN STRUCTURE MATRIX -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 items-start">
+      
+      <!-- LEFT COLUMN MAIN BLOCKS (SPAN 2) -->
+      <div class="md:col-span-2 space-y-6">
+        
+        <!-- Clearing Service Breakdown -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 md:p-8 shadow-sm">
+          <h2 class="text-xs uppercase font-black tracking-widest text-[#f9a825] mb-3">Mombasa Port Agency Matrix</h2>
+          <p class="text-sm text-gray-700 leading-relaxed mb-4">
+            Did you buy a vehicle independently or through another third-party auction grid? We step in as your certified logistics partner at the Mombasa Port to safely clear your unit through the Kenya Revenue Authority (KRA) framework.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-4 mt-6 text-xs text-slate-700">
+            <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
+              <span class="font-bold block text-slate-900 uppercase tracking-wide mb-1">CRSP Valuation Checks</span>
+              We cross-examine the Current Retail Selling Price (CRSP) indexes directly to calculate exact custom duty exposures, avoiding unnecessary over-assessments or penalties.
+            </div>
+            <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
+              <span class="font-bold block text-slate-900 uppercase tracking-wide mb-1">Safe Carrier Transport</span>
+              Once customs clear your unit, we oversee the physical carrier or flatbed staging from Mombasa to our secure distribution yards in Nairobi.
+            </div>
+          </div>
+        </div>
+
+        <!-- Clearance Tracking Milestones -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 md:p-8 shadow-sm">
+          <h3 class="font-black text-xs uppercase tracking-widest text-slate-900 mb-4">The Standard 4-Step Pipeline</h3>
+          
+          <div class="space-y-4 font-medium text-xs">
+            <div class="flex items-center space-x-3 p-2 bg-gray-50 rounded-lg">
+              <span class="font-mono font-black text-[#f9a825] bg-slate-900 w-6 h-6 rounded-full flex items-center justify-center text-[10px]">01</span>
+              <span class="text-slate-900 uppercase font-bold">Document Ingestion & IDF Processing</span>
+            </div>
+            <div class="flex items-center space-x-3 p-2 bg-gray-50 rounded-lg">
+              <span class="font-mono font-black text-[#f9a825] bg-slate-900 w-6 h-6 rounded-full flex items-center justify-center text-[10px]">02</span>
+              <span class="text-slate-900 uppercase font-bold">KRA Customs Declaration Entry Booking</span>
+            </div>
+            <div class="flex items-center space-x-3 p-2 bg-gray-50 rounded-lg">
+              <span class="font-mono font-black text-[#f9a825] bg-slate-900 w-6 h-6 rounded-full flex items-center justify-center text-[10px]">03</span>
+              <span class="text-slate-900 uppercase font-bold">Physical Port Verification & Safety Checks</span>
+            </div>
+            <div class="flex items-center space-x-3 p-2 bg-gray-50 rounded-lg">
+              <span class="font-mono font-black text-[#f9a825] bg-slate-900 w-6 h-6 rounded-full flex items-center justify-center text-[10px]">04</span>
+              <span class="text-slate-900 uppercase font-bold">NTSA Number Plate Assignment & Release</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clearing Intake Request Form -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 md:p-8 shadow-sm">
+          <h3 class="font-black text-xs uppercase tracking-widest text-slate-900 mb-4">Submit Consignment & Clearing Mandate</h3>
+          
+          <form class="space-y-4 text-xs">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-gray-700 mb-1 uppercase tracking-wider">Vehicle Make & Model</label>
+                <input type="text" placeholder="e.g. Toyota Land Cruiser Prado" class="w-full border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-[#f9a825]">
+              </div>
+              <div>
+                <label class="block font-bold text-gray-700 mb-1 uppercase tracking-wider">Year of Manufacture</label>
+                <select class="w-full border border-gray-200 rounded px-3 py-2 bg-white focus:outline-none focus:border-[#f9a825]">
+                  <option>2019</option>
+                  <option>2020</option>
+                  <option>2021</option>
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-gray-700 mb-1 uppercase tracking-wider">Chassis / VIN Number</label>
+                <input type="text" placeholder="e.g. GDH206-XXXXXX" class="w-full border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-[#f9a825]">
+              </div>
+              <div>
+                <label class="block font-bold text-gray-700 mb-1 uppercase tracking-wider">Port of Origin</label>
+                <select class="w-full border border-gray-200 rounded px-3 py-2 bg-white focus:outline-none focus:border-[#f9a825]">
+                  <option>Yokohama / Nagoya (Japan)</option>
+                  <option>London Gateway / Tilbury (UK)</option>
+                  <option>Laem Chabang (Thailand)</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white font-bold uppercase tracking-widest px-5 py-3 rounded transition-colors text-[11px]">
+              Register Consignment Record ➔
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR CONTEXT SYSTEMS -->
+      <div class="space-y-6">
+        
+        <!-- Document Checkbox Requirements -->
+        <div class="bg-slate-950 text-white p-6 rounded-xl border border-slate-800 shadow-sm">
+          <h3 class="font-black text-xs uppercase tracking-widest text-[#f9a825] mb-4">Required Paperwork</h3>
+          
+          <ul class="space-y-3 text-xs text-slate-300 font-medium">
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Original Marine Bill of Lading (B/L)</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>Export Certificate (De-registration Document)</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>QISJ / EAA Inspection Certificate</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <span class="text-emerald-400">✓</span>
+              <span>KRA PIN Certificate copy</span>
+            </li>
+          </ul>
+
+          <hr class="border-slate-900 my-4">
+          <p class="text-[10px] text-slate-500 leading-relaxed text-center">
+            *Vehicles exceeding 8 years old from the first registration date cannot clear standard custom entry layers.
+          </p>
+        </div>
+
+        <!-- Quick Agency Help -->
+        <div class="bg-white border border-gray-200 p-6 rounded-xl text-center">
+          <h4 class="font-bold text-xs uppercase text-slate-900 mb-2">Port Liaison Desk</h4>
+          <p class="text-xs text-gray-500 mb-4">Has your vessel already anchored at the port yard? Contact us to lock down rapid documentation processing.</p>
+          <a href="contact.html" class="inline-block border border-slate-900 hover:bg-slate-900 hover:text-white text-slate-900 font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded transition-all">
+            Assign Clearing Agency
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER PANEL -->
+  <footer class="bg-white border-t border-gray-200 mt-12 py-6">
+    <div class="max-w-7xl mx-auto px-4 text-center text-[11px] text-gray-400 uppercase tracking-widest font-medium">
+      &copy; 2026 Car Buyer Kenya Logistics Group. All Rights Reserved.
+    </div>
+  </footer>
+
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div x-show="mobileMenuOpen" class="fixed inset-0 z-50 overflow-hidden" style="display: none;">
+    <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm" @click="mobileMenuOpen = false"></div>
+    <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="w-screen max-w-xs bg-white p-6 shadow-xl flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-6 border-b border-gray-100">
+            <span class="font-black text-sm uppercase tracking-wider">Navigation Menu</span>
+            <button @click="mobileMenuOpen = false" class="text-slate-900 font-bold p-1 text-sm">✕</button>
+          </div>
+          <nav class="mt-6 space-y-4 font-bold text-xs uppercase tracking-widest text-slate-600">
+            <a href="index.html" class="block hover:text-slate-900 py-1">Home</a>
+            <a href="about.html" class="block hover:text-slate-900 py-1">About Us</a>
+            <a href="auction.html" class="block hover:text-slate-900 py-1">Auction Purchase</a>
+            <a href="showroom.html" class="block hover:text-slate-900 py-1">Nairobi Stock List</a>
+            <a href="finance.html" class="block hover:text-slate-900 py-1">Import Finance</a>
+            <a href="dealers.html" class="block hover:text-slate-900 py-1">B2B Wholesale Dealers</a>
+            <a href="clearing.html" class="block text-[#f9a825] py-1">Clearing & Forwarding</a>
+            <a href="training.html" class="block hover:text-slate-900 py-1">Training Academy</a>
+            <a href="contact.html" class="block hover:text-slate-900 py-1">Contact Us</a>
+          </nav>
+        </div>
+        <div class="text-[10px] text-gray-400 text-center border-t border-gray-100 pt-4">
+          &copy; 2026 Car Buyer Kenya Logistics Group.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
