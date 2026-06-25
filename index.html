@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Buyer Kenya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <!-- jsPDF Library for Generating the Report PDF directly in the browser -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght=400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #fafafa;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="text-slate-900" x-data="{ mobileMenuOpen: false }">
+
+  <header class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-24 items-center">
+        <div class="flex-shrink-0 flex items-center h-full py-2">
+          <!-- The header logo referenced from your local media files -->
+          <img id="header-logo" src="logo.PNG" alt="Car Buyer Kenya Logo" class="h-16 w-auto object-contain max-w-[260px]" />
+        </div>
+
+        <div class="flex items-center">
+          <button @click="mobileMenuOpen = true" type="button" class="inline-flex items-center justify-center p-3 rounded-md text-slate-900 hover:bg-gray-100 focus:outline-none">
+            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-100 bg-gray-50/50 py-4">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex space-x-3 overflow-x-auto no-scrollbar py-2 justify-start md:justify-center">
+          <a href="index.html" class="bg-[#f9a825] text-slate-950 font-black px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap shadow-sm">Home</a>
+          <a href="about.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">About Us</a>
+          <a href="auction.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Auction Purchase</a>
+          <a href="showroom.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Nairobi Stock</a>
+          <a href="finance.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Import Finance</a>
+          <a href="dealers.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">B2B Dealers</a>
+          <a href="clearing.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Port Clearing</a>
+          <a href="training.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Training Academy</a>
+          <a href="contact.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- STATIC HERO CONTAINER WITH MASSIVE HEADING TEXT -->
+  <section class="relative overflow-hidden min-h-[600px] md:min-h-[700px] flex items-center">
+    <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+      <img src="hero-car.JPG" alt="Featured Import Asset" class="w-full h-full object-cover object-center">
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 py-16 md:py-24">
+      <div class="max-w-4xl text-left space-y-6 md:space-y-10">
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight leading-none text-white drop-shadow-[0_5px_10px_rgba(0,0,0,0.85)]">
+          BUYING A CAR FROM JAPAN<br>
+          <span class="text-[#f9a825]">HAS NEVER BEEN MADE THIS EASY!</span>
+        </h1>
+        <p class="text-sm md:text-xl text-gray-200 uppercase tracking-widest font-black max-w-3xl drop-shadow-[0_3px_6px_rgba(0,0,0,0.85)]">
+          WE SOURCE, PROCESS AND SHIP TO CUSTOMER DESTINATIONS WORLDWIDE.
+        </p>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-5 pt-4">
+          <div class="bg-slate-950/80 border border-white/20 backdrop-blur-md text-[#f9a825] px-6 py-3 rounded-full font-black text-sm uppercase tracking-wider inline-block sm:self-start shadow-md">
+            OVER 14 YEARS COMBINED INDUSTRY EXPERIENCE
+          </div>
+          <a href="auction.html" class="bg-[#f9a825] hover:bg-amber-500 text-slate-950 font-black text-sm uppercase tracking-widest px-8 py-4 rounded-full shadow-2xl transition-all inline-block text-center sm:w-auto">
+            Import Now ➔
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    
+    <div class="bg-white rounded-xl border border-gray-100 p-8 md:p-12 shadow-sm max-w-5xl mx-auto mb-16">
+      <p class="text-base md:text-xl text-gray-700 leading-relaxed text-center mb-8 font-medium">
+        You need quality cars for your own use or as a showroom/yard owner? The procurement process can be daunting and stressful. That's where we come in, utilizing over 14 years of industry insights to keep your operations smooth.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto text-sm md:text-base font-bold text-slate-700">
+        <div class="flex items-center space-x-3 bg-gray-50 p-4 rounded-lg">
+          <span class="text-emerald-600 text-lg">✓</span> <span>Professional Sourcing & Documentation</span>
+        </div>
+        <div class="flex items-center space-x-3 bg-gray-50 p-4 rounded-lg">
+          <span class="text-emerald-600 text-lg">✓</span> <span>Rigorous Auction Sheet Translation</span>
+        </div>
+        <div class="flex items-center space-x-3 bg-gray-50 p-4 rounded-lg">
+          <span class="text-emerald-600 text-lg">✓</span> <span>Guaranteed Match on Selected Budget Prices</span>
+        </div>
+        <div class="flex items-center space-x-3 bg-gray-50 p-4 rounded-lg">
+          <span class="text-emerald-600 text-lg">✓</span> <span>Fast Freight Allocation on Next Vessel</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAR OF THE WEEK SECTION WITH SCALED TEXT -->
+    <div class="max-w-5xl mx-auto mb-16">
+      <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm grid md:grid-cols-2 gap-8 p-8 items-center">
+        <div class="bg-gray-100 rounded-xl aspect-[4/3] w-full flex flex-col items-center justify-center border border-gray-200 relative overflow-hidden group">
+          <img src="showcase-car.JPG" alt="Premium Showroom Unit" class="w-full h-full object-cover absolute inset-0" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="hidden flex-col items-center text-center p-6 space-y-3 text-slate-400">
+            <svg class="w-12 h-12 stroke-current" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 002-2H4a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span class="text-xs uppercase tracking-widest font-bold">Upload showcase-car.JPG image asset</span>
+          </div>
+          <span class="absolute top-4 left-4 bg-[#f9a825] text-slate-950 text-xs font-black tracking-widest uppercase px-3 py-1.5 rounded shadow-sm z-10">
+            CAR OF THE WEEK
+          </span>
+        </div>
+        <div class="space-y-5 text-sm md:text-base">
+          <div>
+            <span class="text-xs font-black tracking-widest uppercase text-[#f9a825]">Featured Premium Import</span>
+            <h3 class="text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-tight mt-1">Premium Showroom Stock</h3>
+            <p class="text-gray-600 mt-2 leading-relaxed font-medium">
+              Experience masterclass Japanese luxury craftsmanship. Renowned for supreme executive cabin comfort, cutting-edge telemetry safety kits, and exceptional hybrid fuel efficiency configurations.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-3 border-y border-gray-100 py-4 font-bold text-slate-700 text-sm md:text-base">
+            <div>• Grade: Verified Premium</div>
+            <div>• Engine: Multi-Option Hybrid</div>
+            <div>• Mileage: Low Certified Odo</div>
+            <div>• Transmission: Automatic</div>
+          </div>
+          <div>
+            <a href="auction.html" class="inline-block w-full text-center bg-slate-900 hover:bg-slate-800 text-white font-black uppercase tracking-widest py-4 rounded transition-all text-sm">
+              Import This Unit Now ➔
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORKFLOWS -->
+    <div class="max-w-5xl mx-auto mb-20">
+      <h2 class="text-center font-black uppercase text-2xl tracking-tight mb-10">Select Portal Workflow</h2>
+      <div class="grid sm:grid-cols-2 gap-8">
+        <div class="bg-white p-8 rounded-xl border border-gray-200 flex flex-col justify-between items-start shadow-sm">
+          <div>
+            <h3 class="font-black uppercase text-base md:text-lg tracking-wide text-slate-900">Direct Auction Bidding Portal</h3>
+            <p class="text-sm text-gray-500 mt-2 leading-relaxed">Initiate transparent bidding orders directly from primary source networks across overseas auctions.</p>
+          </div>
+          <a href="auction.html" class="mt-6 bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-widest px-5 py-3 rounded transition-colors">
+            Access Auction Desk ➔
+          </a>
+        </div>
+        <div class="bg-white p-8 rounded-xl border border-gray-200 flex flex-col justify-between items-start shadow-sm">
+          <div>
+            <h3 class="font-black uppercase text-base md:text-lg tracking-wide text-slate-900">Asset Financing Requests</h3>
+            <p class="text-sm text-gray-500 mt-2 leading-relaxed">Custom specialized financial packaging covering CIF costs and landing tariffs for Kenyan buyers.</p>
+          </div>
+          <a href="finance.html" class="mt-6 bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-widest px-5 py-3 rounded transition-colors">
+            Check Finance Criteria ➔
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL/WHATSAPP CAPTURE FORM WITH ACCESSIBLE TEXT SIZES -->
+    <div class="max-w-2xl mx-auto bg-slate-950 text-white rounded-2xl shadow-xl overflow-hidden p-10 border-t-4 border-[#f9a825]">
+      <h3 class="text-xl md:text-2xl font-black uppercase tracking-tight text-[#f9a825] text-center mb-2">
+        Get Free Car Importation Tips Report
+      </h3>
+      <p class="text-xs text-slate-400 text-center mb-8 uppercase tracking-wider font-bold">Complete parameters below to download asset</p>
+
+      <form id="leadForm" onsubmit="handleFormSubmission(event)" class="space-y-5 text-sm">
+        <div>
+          <label class="block uppercase tracking-widest text-slate-400 font-black text-xs mb-1.5">Your Full Name</label>
+          <input type="text" id="clientName" required class="w-full bg-slate-900 border border-slate-800 rounded px-4 py-3.5 text-white text-base focus:outline-none focus:border-[#f9a825]" placeholder="Enter full name">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block uppercase tracking-widest text-slate-400 font-black text-xs mb-1.5">Email Address</label>
+            <input type="email" id="clientEmail" required class="w-full bg-slate-900 border border-slate-800 rounded px-4 py-3.5 text-white text-base focus:outline-none focus:border-[#f9a825]" placeholder="name@email.com">
+          </div>
+          <div>
+            <label class="block uppercase tracking-widest text-slate-400 font-black text-xs mb-1.5">WhatsApp Number</label>
+            <input type="tel" id="clientPhone" required class="w-full bg-slate-900 border border-slate-800 rounded px-4 py-3.5 text-white text-base focus:outline-none focus:border-[#f9a825]" placeholder="e.g. +254 7...">
+          </div>
+        </div>
+
+        <div>
+          <label class="block uppercase tracking-widest text-slate-400 font-black text-xs mb-1.5">Target Vehicle Model & Budget</label>
+          <textarea id="clientDetails" rows="3" required class="w-full bg-slate-900 border border-slate-800 rounded px-4 py-3.5 text-white text-base focus:outline-none focus:border-[#f9a825]" placeholder="e.g. Mazda CX-5 2019, KES 2.5M Max..."></textarea>
+        </div>
+
+        <button type="submit" class="w-full bg-[#f9a825] hover:bg-amber-500 text-slate-950 font-black py-4 rounded uppercase tracking-widest transition-colors mt-4 text-sm shadow-xl">
+          Submit & Download Report ➔
+        </button>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div x-show="mobileMenuOpen" class="fixed inset-0 z-50 overflow-hidden" style="display: none;">
+    <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm" @click="mobileMenuOpen = false"></div>
+    <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="w-screen max-w-sm bg-white p-8 shadow-xl flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-6 border-b border-gray-100">
+            <span class="font-black text-base uppercase tracking-wider">Navigation Menu</span>
+            <button @click="mobileMenuOpen = false" class="text-slate-900 font-black p-2 text-xl">✕</button>
+          </div>
+          <nav class="mt-8 space-y-5 font-black text-sm uppercase tracking-widest text-slate-600">
+            <a href="index.html" class="block text-[#f9a825] py-1">Home</a>
+            <a href="about.html" class="block hover:text-slate-900 py-1">About Us</a>
+            <a href="auction.html" class="block hover:text-slate-900 py-1">Auction Purchase</a>
+            <a href="showroom.html" class="block hover:text-slate-900 py-1">Nairobi Stock List</a>
+            <a href="finance.html" class="block hover:text-slate-900 py-1">Import Finance</a>
+            <a href="dealers.html" class="block hover:text-slate-900 py-1">B2B Wholesale Dealers</a>
+            <a href="clearing.html" class="block hover:text-slate-900 py-1">Clearing & Forwarding</a>
+            <a href="training.html" class="block hover:text-slate-900 py-1">Training Academy</a>
+            <a href="contact.html" class="block hover:text-slate-900 py-1">Contact Us</a>
+          </nav>
+        </div>
+        <div class="text-xs text-gray-400 text-center border-t border-gray-100 pt-6 font-bold">
+          &copy; 2026 Car Buyer Kenya Logistics Group.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SUBMISSION & MERGED PDF CODE LOGIC WITH LARGE READABLE TEXT
+       ========================================================================= -->
+  <script>
+    function handleFormSubmission(event) {
+      event.preventDefault();
+
+      // 1. Gather submission values from form fields
+      const name = document.getElementById('clientName').value;
+      const email = document.getElementById('clientEmail').value;
+      const phone = document.getElementById('clientPhone').value;
+      const details = document.getElementById('clientDetails').value;
+
+      // 2. Compile into an elegant WhatsApp Message payload
+      const whatsappBaseUrl = "https://api.whatsapp.com/send";
+      const targetPhone = "254737911915"; 
+      const messageText = `*New Lead: Car Importation Request*\n\n` +
+                          `👤 *Name:* ${name}\n` +
+                          `📧 *Email:* ${email}\n` +
+                          `📱 *WhatsApp:* ${phone}\n` +
+                          `🚗 *Details & Budget:* ${details}`;
+      
+      const encodedMessage = encodeURIComponent(messageText);
+      const whatsappUrl = `${whatsappBaseUrl}?phone=${targetPhone}&text=${encodedMessage}`;
+
+      // 3. Initiate client-side generation of your document data
+      generateAndDownloadPDF();
+
+      // 4. Instantly redirect client to dispatch data back via WhatsApp
+      window.location.href = whatsappUrl;
+    }
+
+    function generateAndDownloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'a4'
+      });
+
+      let currentY = 15;
+      const margin = 15;
+      const printableWidth = 180;
+
+      // Helper function to handle multi-page overflow cleanly with increased heights
+      function checkPageBreak(neededHeight) {
+        if (currentY + neededHeight > 270) {
+          doc.addPage();
+          currentY = 20;
+          drawPageHeader();
+        }
+      }
+
+      // Reusable header layout for new pages
+      function drawPageHeader() {
+        const logoImg = document.getElementById('header-logo');
+        if (logoImg && logoImg.complete && logoImg.naturalWidth !== 0) {
+          try {
+            doc.addImage(logoImg, 'PNG', margin, currentY - 5, 45, 12);
+          } catch (e) {
+            doc.setFont("helvetica", "bold").setFontSize(16).setTextColor(15, 23, 42);
+            doc.text("CAR BUYER KENYA", margin, currentY);
+          }
+        } else {
+          doc.setFont("helvetica", "bold").setFontSize(16).setTextColor(15, 23, 42);
+          doc.text("CAR BUYER KENYA", margin, currentY);
+        }
+        
+        doc.setDrawColor(249, 168, 37);
+        doc.setLineWidth(0.6);
+        doc.line(margin, currentY + 10, 195, currentY + 10);
+        currentY += 24;
+      }
+
+      // --- PAGE 1: COVER PAGE ---
+      const logoImg = document.getElementById('header-logo');
+      if (logoImg && logoImg.complete && logoImg.naturalWidth !== 0) {
+        try { doc.addImage(logoImg, 'PNG', margin, currentY, 60, 16); } catch (e) {}
+      } else {
+        doc.setFont("helvetica", "bold").setFontSize(22).setTextColor(15, 23, 42);
+        doc.text("CAR BUYER KENYA", margin, currentY + 5);
+      }
+      
+      currentY += 40;
+      doc.setFont("helvetica", "bold").setFontSize(28).setTextColor(15, 23, 42);
+      doc.text("JAPAN CAR EXPORT & IMPORT", margin, currentY);
+      currentY += 14;
+      doc.setFontSize(24);
+      doc.text("TIPS & BEST PRACTICES REPORT", margin, currentY);
+      
+      currentY += 18;
+      doc.setFont("helvetica", "normal").setFontSize(14).setTextColor(100, 116, 139);
+      doc.text("East Africa & Global Markets Edition | June 2026", margin, currentY);
+
+      currentY += 150;
+      doc.setFontSize(11).setFont("helvetica", "italic").setTextColor(148, 163, 184);
+      doc.text("Document source: 'CarBuyerKenya Japan Import Report 2026.docx'", margin, currentY);
+      currentY += 7;
+      doc.text("© 2026 Car Buyer Kenya Logistics Group. All rights reserved.", margin, currentY);
+
+      // --- PAGE 2: MAIN CONTENT ---
+      doc.addPage();
+      currentY = 15;
+      drawPageHeader();
+
+      // CHAPTER 1
+      doc.setFont("helvetica", "bold").setFontSize(18).setTextColor(15, 23, 42);
+      doc.text("1. Why Buy from Japan? The Core Advantage", margin, currentY);
+      currentY += 12;
+
+      doc.setFont("helvetica", "normal").setFontSize(13).setTextColor(51, 65, 85);
+      let p1 = "Japan is the world's premier source for quality used vehicles. For importers serving the East African and global markets, Japanese auction houses represent an unmatched combination of volume, quality, transparency, and value.";
+      let splitP1 = doc.splitTextToSize(p1, printableWidth);
+      doc.text(splitP1, margin, currentY);
+      currentY += (splitP1.length * 7) + 8; 
+
+      checkPageBreak(45);
+      doc.setFont("helvetica", "bold").setFontSize(14);
+      doc.text("1.1 Unrivalled Vehicle Quality", margin, currentY);
+      currentY += 10;
+      
+      doc.setFont("helvetica", "normal").setFontSize(13);
+      let q1 = "• Japan has strict domestic vehicle inspection laws (Shaken) requiring vehicles to meet high standards every two years. Most owners sell before their vehicle's second Shaken, meaning exported cars are typically 3-5 years old with low mileage.\n\n" +
+               "• Japanese roads are well-maintained and driving culture emphasises caution, resulting in minimal accident histories and less body stress on vehicles.";
+      let splitQ1 = doc.splitTextToSize(q1, printableWidth);
+      doc.text(splitQ1, margin, currentY);
+      currentY += (splitQ1.length * 7) + 14;
+
+      // CHAPTER 2
+      checkPageBreak(50);
+      doc.setFont("helvetica", "bold").setFontSize(18).setTextColor(15, 23, 42);
+      doc.text("2. Vehicle Sourcing & Grading Scale System", margin, currentY);
+      currentY += 12;
+
+      doc.setFont("helvetica", "normal").setFontSize(13).setTextColor(51, 65, 85);
+      let p2 = "Japan's auction grading system is one of the most trusted in the global used vehicle trade. Grades are assigned by trained inspectors at each auction house and follow a largely standardised scale across the industry.";
+      let splitP2 = doc.splitTextToSize(p2, printableWidth);
+      doc.text(splitP2, margin, currentY);
+      currentY += (splitP2.length * 7) + 12;
+
+      checkPageBreak(55);
+      doc.setFont("helvetica", "bold").setFontSize(14);
+      doc.text("Key Target Grades for Buyers:", margin, currentY);
+      currentY += 10;
+      
+      doc.setFont("helvetica", "normal").setFontSize(13);
+      doc.text("• Grade 5: Excellent condition. Very low mileage, near-perfect interior and exterior.", margin, currentY); currentY += 9;
+      doc.text("• Grade 4.5: Very good condition. Minor surface scratches only. Best value/quality ratio.", margin, currentY); currentY += 9;
+      doc.text("• Grade 4: Good condition. Small scratches or minor dents. Best sweet spot for East Africa.", margin, currentY); currentY += 9;
+      doc.text("• Grade R / RA: Vehicle has been repaired/accident repaired. Buyers should be cautious.", margin, currentY); currentY += 18;
+
+      // CHAPTER 3
+      checkPageBreak(50);
+      doc.setFont("helvetica", "bold").setFontSize(18).setTextColor(15, 23, 42);
+      doc.text("3. Regulatory Sourcing Overview", margin, currentY);
+      currentY += 12;
+
+      doc.setFont("helvetica", "normal").setFontSize(13).setTextColor(51, 65, 85);
+      doc.text("• Age Limit: Maximum 8 years old from the year of manufacture at the time of import.", margin, currentY); currentY += 10;
+      doc.text("• Right-Hand Drive: Mandatory. Left-hand drive vehicles are not permitted for private registration.", margin, currentY); currentY += 10;
+      doc.text("• KEBS Inspection: Pre-export inspection by KEBS-accredited agent in Japan is mandatory.", margin, currentY);
+
+      // Triggers download processing
+      doc.save("CarBuyerKenya_Japan_Import_Report_2026.pdf");
+    }
+  </script>
+</body>
+</html>
