@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nairobi Stock - Car Buyer Kenya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background-color: #fafafa; }
+    [x-cloak] { display: none !important; }
+
+    .marquee-wrapper { overflow: hidden; white-space: nowrap; }
+    .marquee-track {
+      display: inline-block;
+      animation: marquee 22s linear infinite;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+  </style>
+</head>
+<body class="text-slate-900 overflow-x-hidden" x-data="{
+  sheetId: '1-rGk0xSLEeIEkflto7AIUTfz5WUPwT9EWrZ2NctSuXA',
+  cars: [],
+  init() {
+    fetch('https://docs.google.com/spreadsheets/d/' + this.sheetId + '/export?format=tsv')
+      .then(res => res.text())
+      .then(text => {
+        let rows = text.replace(/\r/g, '').split('\n').map(r => r.split('\t'));
+        let headers = rows[0].map(h => h.trim().toLowerCase());
+
+        this.cars = rows.slice(1).map((row, idx) => {
+          let obj = {};
+          headers.forEach((h, i) => { obj[h] = row[i] ? row[i].trim() : ''; });
+
+          if (!obj.title || obj.section !== 'showroom') return null;
+
+          let raw = (obj.image_url || obj.images_url || '').replace(/[\[\]]/g, '').trim();
+          let displayUrl = 'placeholder-car.jpg';
+
+          if (raw.includes('drive.google.com/file/d/')) {
+            let fileId = raw.match(/\/d\/([a-zA-Z0-9_-]+)/)?.[1];
+            if (fileId) displayUrl = 'https://drive.google.com/uc?export=view&id=' + fileId;
+          } else if (raw.length > 5) {
+            displayUrl = raw;
+          }
+
+          return {
+            id: idx,
+            title: obj.title.toUpperCase(),
+            img: displayUrl,
+            price: obj.price,
+            specs: obj.extras,
+            dep: obj.deposit,
+            mon: obj.monthly_pay
+          };
+        }).filter(c => c !== null);
+      });
+  }
+}">
+
+  <!-- Header -->
+  <header class="bg-white border-b sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+      <img src="logo.PNG" class="h-12 w-auto">
+      <nav class="hidden md:flex gap-2">
+        <a href="index.html" class="text-[10px] font-black border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-900 hover:text-white transition-colors">HOME</a>
+        <a href="about.html" class="text-[10px] font-black border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-900 hover:text-white transition-colors">ABOUT US</a>
+        <a href="auction.html" class="text-[10px] font-black border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-900 hover:text-white transition-colors">AUCTION</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-[#0f172a] text-white py-16 px-4 text-center">
+    <h1 class="text-3xl md:text-5xl font-black uppercase">NAIROBI <span class="text-[#f9a825]">ON-HAND STOCK</span></h1>
+    <p class="text-[10px] md:text-sm text-gray-300 uppercase tracking-widest font-black max-w-lg mx-auto mt-4">
+      This fresh import selected clean cars are now available in our Nairobi showroom.
+    </p>
+  </section>
+
+  <!-- Scrolling Banner -->
+  <div class="bg-[#f9a825] py-3 marquee-wrapper">
+    <div class="marquee-track font-black text-[10px] uppercase tracking-widest">
+      🔥 LIPA MDOGO MDOGO AVAILABLE AND BALANCE TO BE PAID AFTER 48 MONTHS &nbsp;&nbsp;|&nbsp;&nbsp;
+      🔥 LIPA MDOGO MDOGO AVAILABLE AND BALANCE TO BE PAID AFTER 48 MONTHS &nbsp;&nbsp;|&nbsp;&nbsp;
+      🔥 LIPA MDOGO MDOGO AVAILABLE AND BALANCE TO BE PAID AFTER 48 MONTHS &nbsp;&nbsp;|&nbsp;&nbsp;
+      🔥 LIPA MDOGO MDOGO AVAILABLE AND BALANCE TO BE PAID AFTER 48 MONTHS &nbsp;&nbsp;|&nbsp;&nbsp;
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <main class="max-w-7xl mx-auto px-4 py-16">
+    <div x-show="cars.length === 0" class="text-center py-20 text-slate-400 text-xs uppercase tracking-widest">
+      Loading cars...
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <template x-for="car in cars" :key="car.id">
+        <div x-data="{ exp: false }" class="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
+          <div class="w-full h-56 bg-slate-200 overflow-hidden">
+            <img
+              :src="car.img"
+              class="w-full h-full object-cover"
+              onerror="this.onerror=null; this.src='placeholder-car.jpg';"
+            >
+          </div>
+          <div @click="exp = !exp" class="p-6 cursor-pointer">
+            <h3 class="font-black text-sm uppercase" x-text="car.title"></h3>
+            <div class="text-[#f9a825] font-black text-sm mt-1" x-text="car.price"></div>
+            <div class="text-[9px] text-slate-400 mt-1 uppercase font-bold">
+              <span x-show="!exp">Tap for details ▼</span>
+              <span x-show="exp">Hide details ▲</span>
+            </div>
+            <div x-show="exp" x-collapse class="mt-4 pt-4 border-t space-y-4">
+              <p class="text-[10px] text-slate-500 bg-gray-50 p-3 rounded uppercase" x-text="car.specs"></p>
+              <div class="grid grid-cols-2 gap-2 text-[9px] font-bold uppercase bg-slate-900 text-white p-3 rounded-lg">
+                <div>Deposit: <span class="text-[#f9a825]" x-text="car.dep"></span></div>
+                <div>Monthly: <span class="text-[#f9a825]" x-text="car.mon"></span></div>
+              </div>
+              <a href="contact.html" class="block w-full text-center bg-[#f9a825] hover:bg-slate-900 text-slate-900 hover:text-white font-black py-3 rounded-lg text-[10px] uppercase transition-colors">Book Physical Viewing</a>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 text-slate-400 py-12 px-4 text-center border-t border-slate-800">
+    <div class="max-w-xl mx-auto">
+      <h4 class="text-white font-black uppercase text-sm mb-4">Car Buyer Kenya</h4>
+      <p class="text-[11px] leading-relaxed mb-6">Quality-certified imports from Japan and the UK. Your trusted partner in Nairobi for premium vehicle procurement and flexible financing solutions.</p>
+      <div class="flex justify-center gap-4 text-[10px] font-bold uppercase">
+        <a href="index.html" class="hover:text-[#f9a825]">Home</a>
+        <a href="about.html" class="hover:text-[#f9a825]">About</a>
+        <a href="contact.html" class="hover:text-[#f9a825]">Contact</a>
+      </div>
+      <div class="mt-8 text-[9px] uppercase tracking-widest">&copy; 2026 Car Buyer Kenya. All Rights Reserved.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
