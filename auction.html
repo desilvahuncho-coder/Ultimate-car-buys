@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auction Purchase - Car Buyer Kenya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #fafafa;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Cinematic Slow Smoky Reveal Effect */
+    @keyframes smokyReveal {
+      0% {
+        filter: blur(12px);
+        opacity: 0;
+        transform: scale(0.96) translateY(4px);
+        text-shadow: 0 0 40px rgba(255,255,255,0.8);
+      }
+      50% {
+        opacity: 0.5;
+        filter: blur(4px);
+      }
+      100% {
+        filter: blur(0px);
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        text-shadow: none;
+      }
+    }
+
+    .smoky-title {
+      animation: smokyReveal 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    .smoky-subtitle {
+      animation: smokyReveal 2.8s cubic-bezier(0.25, 1, 0.5, 1) 0.4s forwards;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body class="text-slate-900" x-data="{ mobileMenuOpen: false }">
+
+  <!-- BRAND LOGO STRIP (MATCHED LOGO.PNG SETUP) -->
+  <header class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-20 items-center">
+        <!-- Logo Image: logo.PNG from root -->
+        <div class="flex-shrink-0 flex items-center h-full py-2">
+          <img src="logo.PNG" alt="Car Buyer Kenya Logo" class="h-12 w-auto object-contain max-w-[220px]" />
+        </div>
+
+        <div class="flex items-center">
+          <button @click="mobileMenuOpen = true" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-900 hover:bg-gray-100 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Layer Matching All Site Pages -->
+    <div class="border-t border-gray-100 bg-gray-50/50 py-3">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex space-x-2 overflow-x-auto no-scrollbar py-1 justify-start md:justify-center">
+          <a href="index.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Home</a>
+          <a href="about.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">About Us</a>
+          <a href="auction.html" class="bg-[#f9a825] text-slate-950 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap shadow-sm">Auction Purchase</a>
+          <a href="showroom.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Nairobi Stock</a>
+          <a href="finance.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Import Finance</a>
+          <a href="dealers.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">B2B Dealers</a>
+          <a href="clearing.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Port Clearing</a>
+          <a href="training.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Training Academy</a>
+          <a href="contact.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO BANNER WITH ENDLESS LOOP BACKGROUND VIDEO AND OVERLAY TEXT -->
+  <section class="relative bg-[#0f172a] text-white py-16 px-4 text-center overflow-hidden h-[240px] md:h-[280px] flex items-center justify-center">
+    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-40 pointer-events-none">
+      <source src="videos/hero-bg.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-900/50 to-slate-950/80 z-5"></div>
+
+    <div class="max-w-4xl mx-auto z-10 relative">
+      <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight mb-3 smoky-title">
+        EXPERT IMPORT <span class="text-[#f9a825]">DESK</span>
+      </h1>
+      <p class="text-xs md:text-sm text-slate-400 uppercase tracking-widest font-semibold max-w-2xl mx-auto smoky-subtitle">
+        WE BID ON YOUR BEHALF ACROSS LEADING MOTOR AUCTION GRIDS.
+      </p>
+    </div>
+  </section>
+
+  <!-- MAIN WORKFLOW MATRIX -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 items-start">
+      
+      <!-- LEFT WORKFLOW PORTAL DESK (SPAN 2) -->
+      <div class="md:col-span-2 space-y-6">
+        
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 flex items-start space-x-3">
+          <div class="bg-[#f9a825] text-slate-950 font-black rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">!</div>
+          <div>
+            <h4 class="font-bold text-xs uppercase tracking-wide text-slate-900">Professional Sourcing System</h4>
+            <p class="text-xs text-gray-600 mt-1 leading-relaxed">
+              Please note that we do not link clients directly to live bidding portals. All vehicle inquiries and sourcing parameters are managed securely by our Expert Import Desk. We evaluate and bid on your behalf to guarantee verified quality standards.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl border border-gray-100 p-6 md:p-8 shadow-sm">
+          <h2 class="text-xs uppercase font-black tracking-widest text-[#f9a825] mb-3">Why Route Sourcing Through Our Desk?</h2>
+          <p class="text-sm text-gray-700 leading-relaxed mb-4">
+            Importing through our structural auction desk provides you clear access to realistic cost factors, verified mileage documents, and complete condition history reports before a vehicle leaves port.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-3 mt-6 text-xs text-slate-700">
+            <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span class="font-bold block text-slate-900 uppercase tracking-wide mb-1">Broad Catalog Selections</span>
+              Review thousands of units weekly spanning standard hatchbacks, family crossover SUVs, and commercial vehicles.
+            </div>
+            <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span class="font-bold block text-slate-900 uppercase tracking-wide mb-1">Authentic Grading Certificates</span>
+              Receive translated grading inspection sheets explaining cosmetic states, mechanical metrics, and body alignment histories.
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Order Submission Request -->
+        <div class="bg-white rounded-xl border border-gray-100 p-6 md:p-8 shadow-sm">
+          <h3 class="font-black text-xs uppercase tracking-widest text-slate-900 mb-4">Initiate An Auction Sourcing Request</h3>
+          
+          <form class="space-y-4 text-xs">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-gray-700 mb-1 uppercase tracking-wider">Vehicle Make / Brand</label>
+                <input type="text" placeholder="e.g. Toyota" class="w-full border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-[#f9a825]">
+              </div>
+              <div>
+                <label class="block font-bold text-gray-700 mb-1 uppercase tracking-wider">Model Variant Name</label>
+                <input type="text" placeholder="e.g. Land Cruiser Prado" class="w-full border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-[#f9a825]">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-gray-700 mb-1 uppercase tracking-wider">Year of Manufacture Range</label>
+                <input type="text" placeholder="e.g. 2019 - 2021" class="w-full border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-[#f9a825]">
+              </div>
+              <div>
+                <label class="block font-bold text-gray-700 mb-1 uppercase tracking-wider">Car Budget in CnF (in USD $)</label>
+                <input type="text" placeholder="e.g. $25,000" class="w-full border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-[#f9a825]">
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-bold text-gray-700 mb-1 uppercase tracking-wider">Additional Unit Parameters</label>
+              <textarea rows="3" placeholder="Specify preferences regarding color, leather seats, sunroof requirements, or acceptable mileage limits..." class="w-full border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-[#f9a825]"></textarea>
+            </div>
+
+            <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white font-bold uppercase tracking-widest px-5 py-3 rounded transition-colors text-[11px]">
+              Deploy Search Filters ➔
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR CALLOUT -->
+      <div class="space-y-6">
+        
+        <!-- Live System Metric Widget -->
+        <div class="bg-slate-950 text-white p-6 rounded-xl border border-slate-800 shadow-sm space-y-4">
+          <h3 class="font-black text-xs uppercase tracking-widest text-[#f9a825]">Auction Desk Metrics</h3>
+          
+          <div class="space-y-4 text-xs">
+            <div class="flex justify-between border-b border-slate-900 pb-2">
+              <span class="text-slate-400">Main Grid Sourcing:</span>
+              <span class="font-mono text-emerald-400 font-bold">ONLINE / ACTIVE</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-900 pb-2">
+              <span class="text-slate-400">Average Freight Loop:</span>
+              <span class="font-bold">28 - 34 Days</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-900 pb-2">
+              <span class="text-slate-400">Clearing Channels:</span>
+              <span class="font-bold text-[#f9a825]">Destination country port</span>
+            </div>
+          </div>
+
+          <!-- HARD FORCED JUMVEA LOGO & CLIENT STATEMENT BLOCK -->
+          <div class="pt-2 mt-2 border-t border-slate-900 flex flex-col items-center text-center space-y-3">
+            <div class="bg-white p-2 rounded-lg max-w-[140px] w-full shadow-inner flex items-center justify-center">
+              <img src="jumvea-logo.jpg" alt="JUMVEA Registered Member" class="w-full h-auto object-contain">
+            </div>
+            <p class="text-[11px] text-slate-300 font-medium leading-relaxed">
+              JCS our japan supplier partner is a registered member of JUMVEA
+            </p>
+          </div>
+
+          <hr class="border-slate-900 my-2">
+          <p class="text-[10px] text-slate-500 leading-relaxed text-center">
+            All winning invoices are settled via official corporate Telegraphic Transfer (TT) parameters.
+          </p>
+        </div>
+
+        <!-- MATCHED WHATSAPP LEAD ROUTING DISPATCH INQUIRY BOX -->
+        <div class="bg-white border border-gray-200 p-6 rounded-xl text-center">
+          <h4 class="font-bold text-xs uppercase text-slate-900 mb-2">Need Bidding Assistance?</h4>
+          <p class="text-xs text-gray-500 mb-4">Our operations desks provide full manual reading support for Japanese grading certificates.</p>
+          <a href="https://wa.me/254737911915?text=Hello%20Car%20Buyer%20Kenya%2C%20I%20am%20reaching%20out%20from%20your%20website.%20I%20want%20to%20inquire%20about%20importing%20a%20car%20from%20Japan%2FUK.%20Could%20you%20please%20explain%20how%20your%20direct%20auction%20sourcing%20process%20and%20logistics%20workflow%20works%3F" target="_blank" class="inline-block border border-slate-900 hover:bg-slate-900 hover:text-white text-slate-900 font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded transition-all">
+            Consult Agent
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER PANEL -->
+  <footer class="bg-white border-t border-gray-200 mt-12 py-6">
+    <div class="max-w-7xl mx-auto px-4 text-center text-[11px] text-gray-400 uppercase tracking-widest font-medium">
+      &copy; 2026 Car Buyer Kenya Logistics Group. All Rights Reserved.
+    </div>
+  </footer>
+
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div x-show="mobileMenuOpen" class="fixed inset-0 z-50 overflow-hidden" style="display: none;">
+    <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm" @click="mobileMenuOpen = false"></div>
+    <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="w-screen max-w-xs bg-white p-6 shadow-xl flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-6 border-b border-gray-100">
+            <span class="font-black text-sm uppercase tracking-wider">Navigation Menu</span>
+            <button @click="mobileMenuOpen = false" class="text-slate-900 font-bold p-1 text-sm">✕</button>
+          </div>
+          <nav class="mt-6 space-y-4 font-bold text-xs uppercase tracking-widest text-slate-600">
+            <a href="index.html" class="block hover:text-slate-900 py-1">Home</a>
+            <a href="about.html" class="block hover:text-slate-900 py-1">About Us</a>
+            <a href="auction.html" class="block text-[#f9a825] py-1">Auction Purchase</a>
+            <a href="showroom.html" class="block hover:text-slate-900 py-1">Nairobi Stock List</a>
+            <a href="finance.html" class="block hover:text-slate-900 py-1">Import Finance</a>
+            <a href="dealers.html" class="block hover:text-slate-900 py-1">B2B Wholesale Dealers</a>
+            <a href="clearing.html" class="block hover:text-slate-900 py-1">Clearing & Forwarding</a>
+            <a href="training.html" class="block hover:text-slate-900 py-1">Training Academy</a>
+            <a href="contact.html" class="block hover:text-slate-900 py-1">Contact Us</a>
+          </nav>
+        </div>
+        <div class="text-[10px] text-gray-400 text-center border-t border-gray-100 pt-4">
+          &copy; 2026 Car Buyer Kenya Logistics Group.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
