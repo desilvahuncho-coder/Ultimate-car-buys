@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nairobi Stock - Car Buyer Kenya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background-color: #fafafa; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body class="text-slate-900 overflow-x-hidden" x-data="{
+  sheetId: '1-rGk0xSLEeIEkflto7AIUTfz5WUPwT9EWrZ2NctSuXA',
+  cars: [],
+  loading: true,
+  init() {
+    fetch('https://docs.google.com/spreadsheets/d/' + this.sheetId + '/export?format=tsv')
+      .then(res => res.text())
+      .then(text => {
+        let rows = text.replace(/\r/g, '').split('\n').map(r => r.split('\t'));
+        let headers = rows[0].map(h => h.trim().toLowerCase());
+        this.cars = rows.slice(1).map((row, idx) => {
+          let obj = {};
+          headers.forEach((h, i) => { obj[h] = row[i] ? row[i].trim() : ''; });
+          if (!obj.title || obj.section !== 'showroom') return null;
+          return { id: idx, title: obj.title.toUpperCase(), img: obj.images_url || 'placeholder-car.jpg', price: obj.price, specs: obj.extras, dep: obj.deposit, mon: obj.monthly_pay };
+        }).filter(c => c !== null);
+        this.loading = false;
+      });
+  }
+}">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
+      <img src="logo.PNG" class="h-16 w-auto object-contain" />
+    </div>
+    <div class="bg-gray-50/50 py-4 border-t border-gray-100">
+      <div class="flex space-x-3 overflow-x-auto no-scrollbar px-4 justify-start md:justify-center">
+        <a href="index.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase whitespace-nowrap hover:bg-gray-50">Home</a>
+        <a href="about.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase whitespace-nowrap hover:bg-gray-50">About Us</a>
+        <a href="auction.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase whitespace-nowrap hover:bg-gray-50">Auction Purchase</a>
+        <a href="showroom.html" class="bg-[#f9a825] text-slate-950 font-black px-5 py-2.5 rounded-full text-sm uppercase whitespace-nowrap shadow-sm">Nairobi Stock</a>
+        <a href="finance.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase whitespace-nowrap hover:bg-gray-50">Import Finance</a>
+        <a href="dealers.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase whitespace-nowrap hover:bg-gray-50">B2B Dealers</a>
+        <a href="clearing.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase whitespace-nowrap hover:bg-gray-50">Port Clearing</a>
+        <a href="academy.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase whitespace-nowrap hover:bg-gray-50">Training Academy</a>
+        <a href="contact.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase whitespace-nowrap hover:bg-gray-50">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-[#0f172a] text-white py-12 px-4 text-center">
+    <h1 class="text-3xl md:text-5xl font-black uppercase text-[#f9a825]">NAIROBI ON-HAND STOCK</h1>
+    <p class="text-[11px] md:text-sm text-gray-300 mt-6 max-w-lg mx-auto font-medium leading-relaxed">
+      This fresh import selected clean cars are now available in our Nairobi showroom. Come or inquire for more. We have variety.
+    </p>
+  </section>
+
+  <!-- Promotion Banner -->
+  <div class="bg-[#f9a825] py-3 text-center">
+    <p class="text-slate-950 font-black text-xs uppercase tracking-widest px-4">
+      🔥 Lipa mdogo mdogo available and balance to be paid within 48 months 🔥
+    </p>
+  </div>
+
+  <!-- Grid -->
+  <main class="max-w-7xl mx-auto px-4 py-16">
+    <div class="text-center mb-10">
+      <p class="text-[11px] font-black uppercase tracking-widest text-slate-500 animate-pulse">
+        Click on any car to see specs and price
+      </p>
+    </div>
+
+    <div x-show="loading" class="text-center py-20 text-slate-400 text-xs uppercase tracking-widest">Loading cars...</div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <template x-for="car in cars" :key="car.id">
+        <div x-data="{ exp: false }" class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg transition-all">
+          <div class="w-full h-56 bg-slate-800 overflow-hidden">
+            <img :src="car.img" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='placeholder-car.jpg';">
+          </div>
+          <div @click="exp = !exp" class="p-6 cursor-pointer">
+            <h3 class="font-black text-sm uppercase text-white" x-text="car.title"></h3>
+            <div class="text-[#f9a825] font-black text-sm mt-1" x-text="car.price"></div>
+            <div x-show="exp" x-collapse class="mt-4 pt-4 border-t border-slate-700 space-y-4">
+              <p class="text-[10px] text-slate-300 bg-slate-800 p-3 rounded uppercase" x-text="car.specs"></p>
+              <div class="grid grid-cols-2 gap-2 text-[9px] font-bold uppercase bg-slate-800 text-white p-3 rounded-lg">
+                <div>Deposit: <span class="text-[#f9a825]" x-text="car.dep"></span></div>
+                <div>Monthly: <span class="text-[#f9a825]" x-text="car.mon"></span></div>
+              </div>
+              <a href="https://wa.me/254737911915" target="_blank" class="block w-full text-center bg-[#f9a825] hover:bg-white text-slate-900 font-black py-3 rounded-lg text-[10px] uppercase">WhatsApp Us</a>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 text-slate-400 py-16 px-4 text-center border-t border-slate-800">
+    <div class="max-w-xl mx-auto">
+      <h4 class="text-white font-black uppercase text-sm mb-6">Need Help Finding a Car?</h4>
+      <a href="https://wa.me/254737911915" target="_blank" class="inline-block bg-[#25D366] text-white px-8 py-4 rounded-full font-black text-xs uppercase hover:bg-white hover:text-[#25D366] transition-all mb-8">
+        Contact Us on WhatsApp
+      </a>
+      <div class="mt-8 text-[9px] uppercase tracking-widest text-slate-600">&copy; 2026 Car Buyer Kenya. All Rights Reserved.</div>
+    </div>
+  </footer>
+</body>
+</html>
