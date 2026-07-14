@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership Portal | Car Buyer Kenya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background-color: #fafafa; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body class="text-slate-900" x-data="{ mobileMenuOpen: false, mode: 'login' }">
+
+  <!-- HEADER -->
+  <header class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+      <img src="logo.PNG" class="h-14 w-auto" alt="Logo">
+      <button @click="mobileMenuOpen = true" class="p-2 border rounded-lg hover:bg-gray-100">MENU</button>
+    </div>
+    <!-- NAVIGATION -->
+    <div class="bg-gray-50 py-3 border-t">
+      <div class="max-w-7xl mx-auto px-4 flex space-x-2 overflow-x-auto no-scrollbar">
+        <a href="index.html" class="bg-white border px-4 py-2 rounded-full text-xs font-bold uppercase hover:bg-gray-100">Home</a>
+        <a href="auction.html" class="bg-white border px-4 py-2 rounded-full text-xs font-bold uppercase hover:bg-gray-100">Auction</a>
+        <a href="membership.html" class="bg-[#f9a825] px-4 py-2 rounded-full text-xs font-black uppercase">Membership</a>
+        <a href="contact.html" class="bg-white border px-4 py-2 rounded-full text-xs font-bold uppercase hover:bg-gray-100">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MEMBERSHIP GATING -->
+  <main class="max-w-md mx-auto py-16 px-4">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+      
+      <!-- Toggle Header -->
+      <div class="flex gap-4 mb-8">
+        <button @click="mode = 'login'" :class="mode === 'login' ? 'border-b-2 border-[#f9a825]' : ''" class="flex-1 font-black uppercase text-sm pb-2">Login</button>
+        <button @click="mode = 'register'" :class="mode === 'register' ? 'border-b-2 border-[#f9a825]' : ''" class="flex-1 font-black uppercase text-sm pb-2">Sign Up</button>
+      </div>
+
+      <!-- Login View -->
+      <div x-show="mode === 'login'" x-cloak class="space-y-4">
+        <h3 class="font-black uppercase">Welcome Back</h3>
+        <p class="text-xs text-gray-500">Enter your credentials to access the bidding portal and exclusive shipping documents.</p>
+        <input type="text" placeholder="User ID" class="w-full p-3 border rounded-lg">
+        <input type="password" placeholder="Password" class="w-full p-3 border rounded-lg">
+        <button class="w-full bg-[#f9a825] py-3 rounded-lg font-black uppercase">Login</button>
+      </div>
+
+      <!-- Register View -->
+      <div x-show="mode === 'register'" x-cloak class="space-y-4">
+        <h3 class="font-black uppercase">Join the Network</h3>
+        <p class="text-xs text-gray-500">Create an account to track imports, view live auction data, and get priority logistics support.</p>
+        <input type="text" placeholder="Full Name" class="w-full p-3 border rounded-lg">
+        <input type="email" placeholder="Email Address" class="w-full p-3 border rounded-lg">
+        <button class="w-full bg-[#f9a825] py-3 rounded-lg font-black uppercase">Register Account</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- EXPANDED FOOTER -->
+  <footer class="bg-slate-950 text-white py-16 px-4 mt-10">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
+      <div>
+        <h4 class="font-black uppercase mb-4 text-[#f9a825]">Car Buyer Kenya</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">Leading the market in transparent vehicle importation from Japan, UK, and Thailand. 14+ years of integrity.</p>
+      </div>
+      <div>
+        <h4 class="font-black uppercase mb-4">Quick Links</h4>
+        <ul class="text-xs text-slate-400 space-y-2 uppercase font-bold">
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Shipping Rates</a></li>
+          <li><a href="#">How it Works</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-black uppercase mb-4">Verification</h4>
+        <div class="bg-white p-4 rounded-lg text-slate-900 text-center">
+          <p class="font-black text-[10px] uppercase">JUMVEA Registered</p>
+          <p class="text-[9px]">Certificate No: #99283-KE</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-12 text-[10px] text-slate-600 uppercase tracking-widest border-t border-slate-800 pt-8">
+      &copy; 2026 Car Buyer Kenya Logistics Group. All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
