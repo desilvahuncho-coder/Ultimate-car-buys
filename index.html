@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Buyer Kenya | Premium Vehicle Importation & Sourcing</title>
+
+  <!-- SEO & Sourcing Optimization -->
+  <meta name="description" content="Car Buyer Kenya provides expert vehicle importation services from Japan, UK, and Thailand. Access live auctions, transparent port clearing, and premium stock in Nairobi. Sign up for exclusive member tools today.">
+  <meta name="keywords" content="Car Buyer Kenya, vehicle importation Nairobi, japan car auctions kenya, import car financing, car port clearing mombasa, buy cars from japan, JDM car dealers kenya">
+  <link rel="canonical" href="https://carbuyerkenya.com">
+
+  <!-- Schema Markup for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutomotiveBusiness",
+    "name": "Car Buyer Kenya",
+    "url": "https://carbuyerkenya.com",
+    "description": "Premium vehicle importation and logistics services in Kenya."
+  }
+  </script>
+
+  <!-- WhatsApp & Social Media Preview Cards -->
+  <meta property="og:title" content="Car Buyer Kenya | Premium Vehicle Importation & Sourcing">
+  <meta property="og:description" content="Import your next vehicle safely from certified global suppliers. Access live Japanese auctions with total cost transparency.">
+  <meta property="og:image" content="logo.PNG">
+  <meta property="og:url" content="https://carbuyerkenya.com">
+  <meta property="og:type" content="website">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background-color: #fafafa; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body class="text-slate-900" x-data="{ 
+  mobileMenuOpen: false,
+  sheetId: '1-rGk0xSLEeIEkflto7AIUTfz5WUPwT9EWrZ2NctSuXA',
+  car: null,
+  rate: 129.5,
+
+  formatUSD(kesString) {
+    const num = parseFloat(kesString.toString().replace(/[^0-9.-]+/g, ''));
+    if (isNaN(num)) return kesString;
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num / this.rate);
+  },
+
+  init() {
+    fetch(`https://docs.google.com/spreadsheets/d/${this.sheetId}/export?format=tsv`)
+      .then(res => res.text())
+      .then(text => {
+        let rows = text.replace(/\r/g, '').split('\n').map(r => r.split('\t'));
+        let headers = rows[0].map(h => h.trim().toLowerCase());
+        
+        let sectionIdx = headers.indexOf('section');
+        let weeklyCarRow = rows.slice(1).find(row => 
+          sectionIdx !== -1 && row[sectionIdx] && row[sectionIdx].trim().toLowerCase() === 'car_of_the_week'
+        );
+
+        if (weeklyCarRow) {
+          let obj = {};
+          headers.forEach((h, i) => { obj[h] = weeklyCarRow[i] ? weeklyCarRow[i].trim() : ''; });
+          this.car = {
+            title: obj.title || '',
+            imageUrl: obj.images_url || '',
+            lotNo: obj.lot_no || '',
+            stockId: obj.stock_id || '',
+            model: obj.model || '',
+            mileage: obj.mileage || '',
+            engine: obj.engine || '',
+            color: obj.color || '',
+            drive: obj.drive || '',
+            extras: obj.extras || '',
+            price: obj.price ? this.formatUSD(obj.price) : 'Contact Us'
+          };
+        }
+      })
+  }
+}">
+
+  <!-- ===== HEADER ===== -->
+  <header class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-24 items-center">
+        <div class="flex-shrink-0 flex items-center h-full py-2">
+          <img id="header-logo" src="logo.PNG" alt="Car Buyer Kenya Logo" class="h-16 w-auto object-contain max-w-[260px]" />
+        </div>
+        <div class="flex items-center">
+          <button @click="mobileMenuOpen = true" type="button" class="inline-flex items-center justify-center p-3 rounded-md text-slate-900 hover:bg-gray-100 focus:outline-none">
+            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-100 bg-gray-50/50 py-4">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex space-x-3 overflow-x-auto no-scrollbar py-2 justify-start md:justify-center">
+          <a href="index.html" class="bg-[#f9a825] text-slate-950 font-black px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap shadow-sm">Home</a>
+          <a href="about.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">About Us</a>
+          <a href="auction.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Auction Purchase</a>
+          <a href="showroom.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Nairobi Stock</a>
+          <a href="finance.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Import Finance</a>
+          <a href="dealers.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">B2B Dealers</a>
+          <a href="clearing.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Port Clearing</a>
+          <a href="training.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Training Academy</a>
+          <a href="contact.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Contact</a>
+          <a href="membership.html" class="bg-white border border-gray-200 text-slate-700 font-bold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider whitespace-nowrap transition-colors hover:bg-gray-50">Membership</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div x-show="mobileMenuOpen" x-cloak class="fixed inset-0 z-50 bg-slate-950/95 flex flex-col items-center justify-center space-y-6 text-white">
+    <button @click="mobileMenuOpen = false" class="absolute top-6 right-6 text-white text-4xl font-black">&times;</button>
+    <a href="index.html" @click="mobileMenuOpen = false" class="text-[#f9a825] font-black text-xl uppercase tracking-widest">Home</a>
+    <a href="about.html" @click="mobileMenuOpen = false" class="font-black text-xl uppercase tracking-widest hover:text-[#f9a825] transition-colors">About Us</a>
+    <a href="auction.html" @click="mobileMenuOpen = false" class="font-black text-xl uppercase tracking-widest hover:text-[#f9a825] transition-colors">Auction Purchase</a>
+    <a href="showroom.html" @click="mobileMenuOpen = false" class="font-black text-xl uppercase tracking-widest hover:text-[#f9a825] transition-colors">Nairobi Stock</a>
+    <a href="finance.html" @click="mobileMenuOpen = false" class="font-black text-xl uppercase tracking-widest hover:text-[#f9a825] transition-colors">Import Finance</a>
+    <a href="dealers.html" @click="mobileMenuOpen = false" class="font-black text-xl uppercase tracking-widest hover:text-[#f9a825] transition-colors">B2B Dealers</a>
+    <a href="clearing.html" @click="mobileMenuOpen = false" class="font-black text-xl uppercase tracking-widest hover:text-[#f9a825] transition-colors">Port Clearing</a>
+    <a href="training.html" @click="mobileMenuOpen = false" class="font-black text-xl uppercase tracking-widest hover:text-[#f9a825] transition-colors">Training Academy</a>
+    <a href="contact.html" @click="mobileMenuOpen = false" class="font-black text-xl uppercase tracking-widest hover:text-[#f9a825] transition-colors">Contact</a>
+    <a href="membership.html" @click="mobileMenuOpen = false" class="font-black text-xl uppercase tracking-widest hover:text-[#f9a825] transition-colors">Membership</a>
+  </div>
+...
+</body>
+</html>
