@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://carbuyerkenya.com/sitemap.xml
