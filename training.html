@@ -1,0 +1,49 @@
+        <!-- Academy Enrollment Form -->
+        <section class="bg-white rounded-xl border border-gray-200 p-8 md:p-12 shadow-sm">
+          <h2 class="font-black uppercase text-2xl tracking-tight mb-2 text-slate-900">Request Academy Seat Allocation</h2>
+          <p class="text-sm text-gray-600 mb-8 font-medium">Fill out your details below and hit submit to instantly reserve your placement for the upcoming training cohort.</p>
+          
+          <form class="space-y-6 text-sm" action="https://formsubmit.co/ajax/training@carbuyerkenya.com" method="POST" onsubmit="handleTrainingForm(event)">
+            <!-- FormSubmit Configuration Inputs -->
+            <input type="hidden" name="_subject" value="New Training Academy Seat Application">
+            <input type="hidden" name="_cc" value="import@carbuyerkenya.com">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="fullName" class="block font-black text-gray-700 mb-2 uppercase tracking-wider text-xs">Full Legal Name</label>
+                <input id="fullName" name="fullName" type="text" placeholder="e.g. John Kamau" required class="w-full border border-gray-300 rounded-lg px-4 py-3 text-base focus:outline-none focus:border-[#f9a825]">
+              </div>
+              <div>
+                <label for="phoneLine" class="block font-black text-gray-700 mb-2 uppercase tracking-wider text-xs">Phone / WhatsApp Line</label>
+                <input id="phoneLine" name="phoneLine" type="text" placeholder="e.g. +254 700 000000" required class="w-full border border-gray-300 rounded-lg px-4 py-3 text-base focus:outline-none focus:border-[#f9a825]">
+              </div>
+            </div>
+
+            <!-- Email Address Field Added to Ensure Direct Lead Ingestion -->
+            <div>
+              <label for="email" class="block font-black text-gray-700 mb-2 uppercase tracking-wider text-xs">Email Address</label>
+              <input id="email" name="email" type="email" placeholder="e.g. john@example.com" required class="w-full border border-gray-300 rounded-lg px-4 py-3 text-base focus:outline-none focus:border-[#f9a825]">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="targetTrack" class="block font-black text-gray-700 mb-2 uppercase tracking-wider text-xs">Target Track</label>
+                <select id="targetTrack" name="targetTrack" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-base bg-white focus:outline-none focus:border-[#f9a825]">
+                  <option value="Independent Importer Cohort (4 Weeks)">Independent Importer Cohort (4 Weeks)</option>
+                  <option value="Commercial Dealership Masterclass (6 Weeks)">Commercial Dealership Masterclass (6 Weeks)</option>
+                </select>
+              </div>
+              <div>
+                <label for="expLevel" class="block font-black text-gray-700 mb-2 uppercase tracking-wider text-xs">Current Experience Level</label>
+                <select id="expLevel" name="expLevel" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-base bg-white focus:outline-none focus:border-[#f9a825]">
+                  <option value="Complete Beginner">Complete Beginner (No background)</option>
+                  <option value="Intermediate">Intermediate (Have handled vehicle sales before)</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-black uppercase tracking-widest px-8 py-4 rounded-lg text-xs shadow-md transition-transform transform hover:scale-[1.01]">
+              Submit Application Profile ➔
+            </button>
+          </form>
+        </section>
